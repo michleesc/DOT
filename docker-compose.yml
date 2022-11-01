@@ -4,7 +4,7 @@ services:
 
   dot_db:
     image: mariadb:10.2
-    container_name: mysqll
+    container_name: mysql
     restart: unless-stopped
     tty: true
     ports:
@@ -19,7 +19,7 @@ services:
       TZ: Asia/Jakarta
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
-      lumen_php:
+  lumen_php:
     build:
       context: ./php
     image: "${COMPOSE_PROJECT_NAME}/${REPOSITORY_NAME}_php:${IMAGE_TAG}"
@@ -29,7 +29,7 @@ services:
       - ./src:/var/www/html
       - ./php/www.conf:/usr/local/etc/php-fpm.d/www.conf
     working_dir: /var/www/html
-
+    
   lumen_nginx:
     build:
       context: ./nginx
